@@ -27,46 +27,32 @@ class ArticlesController extends Controller
     }
 
     public function store (){
-        request()->validate([
-            'title' => 'required',
-            'excerpt' => 'required',
-            'body' => 'required'
-        ]);
-
-        $new_article = new Article();
-
-        $new_article->title = \request('title');
-        $new_article->excerpt = \request('excerpt');
-        $new_article->body = \request('body');
-
-        $new_article->save();
+        Article::create($this->validateArticle());
 
         return redirect('/articles/');
     }
 
-    public function edit ($id) {
-        $article = Article::find($id);
+    public function edit (Article $article){
 
         return view('articles.edit', ['article'=> $article]);
     }
 
-    public function update($id)
+    public function update (Article $article){
+        $article->update($this->validateArticle());
+
+        return redirect('/articles/' . $article->id );
+    }
+
+    /**
+     * @return array
+     */
+    protected function validateArticle(): array
     {
-        request()->validate([
+        return request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required'
         ]);
-
-        $article = Article::find($id);
-
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-
-        $article->save();
-
-        return redirect('/articles/' . $article->id );
     }
 }
 
