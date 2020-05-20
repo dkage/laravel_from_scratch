@@ -26,10 +26,8 @@ Route::get('/about', function (){
 
 Route::get('/articles', 'ArticlesController@index');
 Route::post('/articles', 'ArticlesController@store');
-
 Route::get('/articles/create', 'ArticlesController@create');
 Route::get('/articles/{article}', 'ArticlesController@show');
-
-
-Route::get('/posts/{post}', 'PostsController@show');
+Route::put('/articles/{article}', 'ArticlesController@update');
+Route::get('/articles/{article}/edit', 'ArticlesController@edit');
 

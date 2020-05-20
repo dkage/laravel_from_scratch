@@ -12,7 +12,15 @@
     <link href="/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
     <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+    <style type="text/css">
+        .bad {
+            color: red;
+        }
+        .bad-input {
+            border: 5px solid red;
+        }
 
+    </style>
 </head>
 <body>
 

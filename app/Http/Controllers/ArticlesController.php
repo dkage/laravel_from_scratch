@@ -13,8 +13,11 @@ class ArticlesController extends Controller
     }
 
 
-    public function show ($articleid){
-        $article = Article::find($articleid);
+    public function show (Article $article){
+
+        // For grabbing a deatailed view of a article, this works.
+        // OBJECT $variable_name needs to be the same name as wildcard from route
+        // public function show (Article $article){   is the same as this $article = Article::find($id);
 
         return view('articles.show', ['article' => $article ]);
     }
@@ -24,6 +27,12 @@ class ArticlesController extends Controller
     }
 
     public function store (){
+        request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
+
         $new_article = new Article();
 
         $new_article->title = \request('title');
@@ -32,7 +41,32 @@ class ArticlesController extends Controller
 
         $new_article->save();
 
-        return view('articles.index');
+        return redirect('/articles/');
     }
 
+    public function edit ($id) {
+        $article = Article::find($id);
+
+        return view('articles.edit', ['article'=> $article]);
+    }
+
+    public function update($id)
+    {
+        request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
+
+        $article = Article::find($id);
+
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+
+        $article->save();
+
+        return redirect('/articles/' . $article->id );
+    }
 }
+
