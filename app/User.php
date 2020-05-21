@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class); // Similar to "SELECT * FROM articles WHERE user_id = $this->id"
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Article::class); // Similar to "SELECT * FROM projects WHERE user_id = $this->id"
+    }
 }
+
+// Considering those functions as SQL queries, we have with the following code, this output
+// $user = User::find(1)   // equals: "SELECT * FROM user WHERE id = 1"
+// $user->projects  // equals: "SELECT * FROM projects WHERE user_id = $this->id"

@@ -40,7 +40,7 @@ class ArticlesController extends Controller
     public function update (Article $article){
         $article->update($this->validateArticle());
 
-        return redirect('/articles/' . $article->id );
+        return redirect('/articles/' . $article->id);
     }
 
     /**
