@@ -14,8 +14,8 @@ class Article extends Model
         return $this->belongsTo(User::class, 'user_id'); // this looks for user_id == function name + id
     }
 
-    public function tag()
+    public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 }
