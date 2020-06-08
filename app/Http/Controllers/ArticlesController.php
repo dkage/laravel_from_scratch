@@ -23,9 +23,9 @@ class ArticlesController extends Controller
 
     public function show (Article $article){
 
-        // For grabbing a deatailed view of a article, this works.
+        // For grabbing a detailed view of a article, this works.
         // OBJECT $variable_name needs to be the same name as wildcard from route
-        // public function show (Article $article){   is the same as this $article = Article::find($id);
+        // public function show (Article $article){ is the same as this $article = Article::find($id);
         return view('articles.show', ['article' => $article ]);
     }
 
