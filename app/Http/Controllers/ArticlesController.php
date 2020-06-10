@@ -40,7 +40,7 @@ class ArticlesController extends Controller
         $this->validateArticle();
 
         $article = new Article(\request(['title', 'excerpt', 'body' ]));
-        $article->user_id = 2; // auth()->id()
+        $article->user_id = 2; // if system had auth enabled, the correct approach would be: "auth()->id()"
         $article->save();
 
         $article->tags()->attach(request('tags'));
